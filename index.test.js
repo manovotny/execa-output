@@ -1,11 +1,6 @@
-const streamToObservable = require('@samverschueren/stream-to-observable');
-const Chance = require('chance');
 const execa = require('execa');
 const rxjs = require('rxjs');
-const rxjsOperators = require('rxjs/operators');
 const split = require('split');
-
-const execao = require('./index');
 
 jest.mock('@samverschueren/stream-to-observable');
 jest.mock('execa');
@@ -13,29 +8,32 @@ jest.mock('rxjs');
 jest.mock('rxjs/operators');
 jest.mock('split');
 
-const chance = new Chance();
+describe('execao', () => {
+    let execao;
 
-beforeEach(() => {
-    execa.mockImplementation(() => {
-        return {
+    beforeEach(() => {
+        execa.mockReturnValue({
             stderr: {
                 pipe: jest.fn()
             },
             stdout: {
                 pipe: jest.fn()
             }
-        }
+        });
+
+        rxjs.merge.mockReturnValue({
+            pipe: jest.fn()
+        });
+
+        execao = require('./index');
     });
 
-    execao();
-});
+    afterEach(() => {
+        jest.resetAllMocks();
+    });
 
-afterEach(() => {
-    jest.resetAllMocks();
-});
-
-describe('split', () => {
     it('should be called twice', () => {
+        execao();
         expect(split).toHaveBeenCalledTimes(2);
     });
 });
