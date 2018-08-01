@@ -74,7 +74,7 @@ afterEach(() => {
 });
 
 describe('execa', () => {
-    it('should be called with command and arguments', () => {
+    test('should be called with command and arguments', () => {
         const cmd = chance.string();
         const args = chance.string();
 
@@ -86,23 +86,27 @@ describe('execa', () => {
 });
 
 describe('execa return value', () => {
-    it('should call stdout pipe with split', () => {
+    test('should call stdout pipe with split', () => {
         execao();
 
         expect(execaReturnValue.stdout.pipe).toHaveBeenCalledTimes(1);
-        expect(execaReturnValue.stdout.pipe).toHaveBeenCalledWith(splitReturnValueFirst);
+        expect(execaReturnValue.stdout.pipe).toHaveBeenCalledWith(
+            splitReturnValueFirst
+        );
     });
 
-    it('should call stderr pipe with split', () => {
+    test('should call stderr pipe with split', () => {
         execao();
 
         expect(execaReturnValue.stderr.pipe).toHaveBeenCalledTimes(1);
-        expect(execaReturnValue.stderr.pipe).toHaveBeenCalledWith(splitReturnValueSecond);
+        expect(execaReturnValue.stderr.pipe).toHaveBeenCalledWith(
+            splitReturnValueSecond
+        );
     });
 });
 
 describe('streamToObservable', () => {
-    it('should be called with execa pipes and options', () => {
+    test('should be called with execa pipes and options', () => {
         const options = {
             await: execaReturnValue
         };
@@ -118,7 +122,7 @@ describe('streamToObservable', () => {
 });
 
 describe('split', () => {
-    it('should be called for each observable', () => {
+    test('should be called for each observable', () => {
         execao();
 
         expect(split).toHaveBeenCalledTimes(2);
@@ -127,7 +131,7 @@ describe('split', () => {
 });
 
 describe('filter', () => {
-    it('should be called with boolean', () => {
+    test('should be called with boolean', () => {
         execao();
 
         expect(rxjsOperators.filter).toHaveBeenCalledTimes(1);
@@ -136,21 +140,24 @@ describe('filter', () => {
 });
 
 describe('merge', () => {
-    it('should be called with observables', () => {
+    test('should be called with observables', () => {
         execao();
 
         expect(rxjs.merge).toHaveBeenCalledTimes(1);
-        expect(rxjs.merge).toHaveBeenCalledWith(streamToObservableReturnValueFirst, streamToObservableReturnValueSecond);
+        expect(rxjs.merge).toHaveBeenCalledWith(
+            streamToObservableReturnValueFirst,
+            streamToObservableReturnValueSecond
+        );
     });
 
-    it('should call pipe with filter value', () => {
+    test('should call pipe with filter value', () => {
         execao();
 
         expect(mergeReturnValue.pipe).toHaveBeenCalledTimes(1);
         expect(mergeReturnValue.pipe).toHaveBeenCalledWith(filterReturnValue);
     });
 
-    it('should return merge pipe results', () => {
+    test('should return merge pipe results', () => {
         const results = execao();
 
         expect(results).toEqual(mergePipeReturnValue);
