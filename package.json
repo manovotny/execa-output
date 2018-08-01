@@ -20,7 +20,7 @@
     "random"
   ],
   "engines": {
-    "node": ">=8.0.0",
+    "node": ">=8.6.0",
     "yarn": ">=1.0.0"
   },
   "main": "index.js",
@@ -34,13 +34,17 @@
   },
   "dependencies": {
     "@samverschueren/stream-to-observable": "0.3.0",
-    "chance": "1.0.13",
-    "execa": "0.10.0",
-    "rxjs": "6.2.1",
+    "rxjs": "6.2.2",
     "split": "1.0.1"
   },
   "devDependencies": {
-    "jest": "22.4.3"
+    "chance": "1.0.16",
+    "chance-object": "1.0.1",
+    "execa": "0.10.0",
+    "jest": "23.4.2"
+  },
+  "peerDependencies": {
+    "execa": "^0.10.0"
   },
   "jest": {
     "coverageDirectory": ".jest-coverage",
@@ -51,6 +55,7 @@
         "lines": 100,
         "statements": 100
       }
-    }
+    },
+    "testEnvironment": "node"
   }
 }
