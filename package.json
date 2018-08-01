@@ -32,9 +32,16 @@
   "scripts": {
     "coverage": "jest --coverage",
     "lint": "eslint . --ext .json --ext .js",
+    "precommit": "lint-staged",
     "prettier": "prettier --write \"**/*.{js,json,md,yml}\"",
     "test": "yarn lint && yarn coverage",
     "unit": "jest"
+  },
+  "lint-staged": {
+    "*.{js,json,md,yml}": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@samverschueren/stream-to-observable": "0.3.0",
@@ -48,7 +55,9 @@
     "eslint-config-get-off-my-lawn": "4.0.1",
     "eslint-config-prettier": "2.9.0",
     "execa": "0.10.0",
+    "husky": "0.14.3",
     "jest": "23.4.2",
+    "lint-staged": "7.2.0",
     "prettier": "1.14.0"
   },
   "peerDependencies": {
