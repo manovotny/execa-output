@@ -1,32 +1,31 @@
 {
-  "name": "chance-path",
-  "description": "A Chance.js mixin to generate paths.",
-  "version": "1.0.1",
+  "name": "execa-observable",
+  "description": "A utility to convert execa commands into observables for displaying command output in Listr.",
+  "version": "0.0.0",
   "author": {
     "name": "Michael Novotny",
     "email": "manovotny@gmail.com",
-    "url": "htts://manovotny.com"
+    "url": "https://manovotny.com"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/manovotny/chance-path.git"
+    "url": "git+https://github.com/manovotny/execa-observable.git"
   },
   "keywords": [
-    "chance",
-    "generated",
-    "mixin",
-    "path",
-    "random"
+    "child",
+    "command",
+    "execa",
+    "listr",
+    "observable",
+    "output",
+    "process"
   ],
   "engines": {
     "node": ">=8.6.0",
     "yarn": ">=1.0.0"
   },
   "main": "index.js",
-  "files": [
-    "index.js"
-  ],
   "scripts": {
     "coverage": "jest --coverage",
     "test": "npm run coverage",
