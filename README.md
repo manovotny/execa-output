@@ -79,4 +79,4 @@ For example, `chance.path({root: true})` would produce something like `/random/r
 
 ## License
 
-MIT © [Michael Novotny](http://manovotny.com)
+MIT © [Michael Novotny](https://manovotny.com)
