@@ -1,81 +1,57 @@
-# chance-path [![Build Status](https://travis-ci.org/manovotny/chance-path.svg?branch=master)](https://travis-ci.org/manovotny/chance-path)
+# execa-output
 
-> A [Chance.js mixin](http://chancejs.com/#mixin) to generate paths.
+> A utility to display command output when using [execa](https://www.npmjs.com/package/execa) with [listr](https://www.npmjs.com/package/listr).
+
+`execa-output` is responsible for creating the output sub text, like `→ text`, as seen in the screenshot below.
+
+![Screenshot](assets/demo.gif)
 
 ## Install
 
 ### NPM
 
 ```
-$ npm i chance-path
+$ npm i execa-output
 ```
 
 ### Yarn
 
 ```
-$ yarn add chance-path
+$ yarn add execa-output
 ```
 
 ## Usage
 
 ```js
-import Chance from 'chance';
-import path from 'chance-path';
+const execa = require('execa');
+const execao = require('execa-output');
+const Listr = require('listr');
 
-const chance = new Chance();
+const tasks = new Listr([
+    {
+        task: () => execa('some', ['command']),
+        title: 'Comamnd without output or output you do not care to show'
+    },
+    {
+        task: () => execao('some', ['other', 'command']),
+        title: 'Command with output you want to show'
+    }
+]);
 
-chance.mixin({
-    path
-});
-
-chance.path();
-```
-
-By default, `chance-path` will return a randomly generated path.
-
-Example: `some/random/path/to/something/somewhere/some.file`
-
-### Options
-
-Below is a list of available configuration options that you can pass into `chance-path`.
-
-```js
-chance.path({
-    // options
+tasks.run().catch((error) => {
+    console.error(error);
 });
 ```
 
-#### depth
+## Credit
 
-Specifies how deep the path is.
+I use [np](https://github.com/sindresorhus/np) to release npm packages and I have always :heart: it's simple, elegant presentation. It's how I learned about [execa](https://github.com/sindresorhus/execa) and [listr](https://github.com/SamVerschueren/listr), which I now use to build a lot of my own, custom [npm scripts](https://docs.npmjs.com/misc/scripts).
 
-For example, `chance.path({depth: 4})` would produce something like `path/depth/of/four/random.random`.
+There's [an issue on listr](https://github.com/SamVerschueren/listr/issues/90) where people wanted to know how to display long running task output and [it was recommended](https://github.com/SamVerschueren/listr/issues/90#issuecomment-382702459) that one could reimplement / resue [the code np uses](https://github.com/sindresorhus/np/blob/5d923655a3986d04ea14035d20d5c0c16964b7fe/index.js#L17-L25).
 
-> Defaults to [`chance.d6()`](http://chancejs.com/#dice).
+This is exactly why `execa-output` was created.
 
-#### ext
-
-Specifies what the file extension is.
-
-For example, `chance.path({ext: '.custom'})` would produce something like `random/random/random.custom`.
-
-> Defaults to [`chance.word()`](http://chancejs.com/#word).
-
-#### name
-
-Specifies what the file name is.
-
-For example, `chance.path({name: 'custom'})` would produce something like `random/random/custom.random`.
-
-> Defaults to [`chance.word()`](http://chancejs.com/#word).
-
-#### root
-
-Specifies if the path should be a root path.
-
-For example, `chance.path({root: true})` would produce something like `/random/random/random.random`.
-
-> Defaults to [`chance.bool()`](http://chancejs.com/#bool).
+All credit for this code goes to @sindresorhus and @SamVerschueren for the original implementation. :pray: I simply modularized it for reuse.
 
 ## License
 

@@ -1,6 +1,6 @@
 {
-  "name": "execa-observable",
-  "description": "A utility to convert execa commands into observables for displaying command output in Listr.",
+  "name": "execa-output",
+  "description": "A utility to display command output when using execa with listr.",
   "version": "0.0.0",
   "author": {
     "name": "Michael Novotny",
@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/manovotny/execa-observable.git"
+    "url": "git+https://github.com/manovotny/execa-output.git"
   },
   "keywords": [
     "child",
@@ -19,7 +19,8 @@
     "listr",
     "observable",
     "output",
-    "process"
+    "process",
+    "task"
   ],
   "engines": {
     "node": ">=8.6.0",
