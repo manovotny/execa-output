@@ -51,7 +51,9 @@ There's [an issue on listr](https://github.com/SamVerschueren/listr/issues/90) w
 
 This is exactly why `execa-output` was created.
 
-All credit for this code goes to @sindresorhus and @SamVerschueren for the original implementation. :pray: I simply modularized it for reuse.
+All credit for this code goes to [@sindresorhus](https://github.com/sindresorhus) and [@SamVerschueren](https://github.com/SamVerschueren) for the original implementation. :pray:
+
+I simply modularized it for reuse.
 
 ## License
 
