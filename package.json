@@ -54,12 +54,12 @@
     "chance-object": "1.0.1",
     "eslint": "4.19.1",
     "eslint-config-get-off-my-lawn": "4.0.1",
-    "eslint-config-prettier": "2.9.0",
-    "execa": "0.10.0",
+    "eslint-config-prettier": "3.0.1",
+    "execa": "0.11.0",
     "husky": "0.14.3",
     "jest": "23.5.0",
-    "lint-staged": "7.2.0",
-    "prettier": "1.14.0"
+    "lint-staged": "7.2.2",
+    "prettier": "1.14.2"
   },
   "peerDependencies": {
     "execa": "^0.10.0"
