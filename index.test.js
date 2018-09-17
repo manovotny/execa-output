@@ -25,13 +25,17 @@ let execao,
     mergePipeReturnValue,
     splitReturnValueFirst,
     splitReturnValueSecond,
+    resultValue,
     stderrReturnValue,
     stdoutReturnValue,
     streamToObservableReturnValueFirst,
     streamToObservableReturnValueSecond;
 
 beforeEach(() => {
-    stderrReturnValue = chance.string();
+    resultValue = chance.object({
+        stdout: chance.string()
+    });
+    stdoutReturnValue = chance.string();
     stdoutReturnValue = chance.string();
     execaReturnValue = chance.object({
         stderr: {
@@ -40,8 +44,11 @@ beforeEach(() => {
         stdout: {
             pipe: jest.fn(() => stdoutReturnValue)
         }
+        // then: jest.fn(() => {
+        //     console.log('IN TEST');
+        //     return resultValue;
+        // })
     });
-
     filterReturnValue = chance.string();
     splitReturnValueFirst = chance.string();
     splitReturnValueSecond = chance.string();
@@ -77,11 +84,12 @@ describe('execa', () => {
     test('should be called with command and arguments', () => {
         const cmd = chance.string();
         const args = chance.string();
+        const options = chance.string();
 
-        execao(cmd, args);
+        execao(cmd, args, options);
 
         expect(execa).toHaveBeenCalledTimes(1);
-        expect(execa).toHaveBeenCalledWith(cmd, args);
+        expect(execa).toHaveBeenCalledWith(cmd, args, options);
     });
 });
 
@@ -161,5 +169,20 @@ describe('merge', () => {
         const results = execao();
 
         expect(results).toEqual(mergePipeReturnValue);
+    });
+});
+
+describe('callback', () => {
+    test('should not throw an error when a callback is not provided', () => {
+        execao();
+    });
+
+    test.only('should call callback when provided', async () => {
+        const callback = jest.fn();
+
+        execao(null, null, null, callback);
+
+        expect(callback).toHaveBeenCalledTimes(1);
+        expect(callback).toHaveBeenCalledWith(resultValue.stdout);
     });
 });

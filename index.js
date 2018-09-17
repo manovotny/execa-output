@@ -4,8 +4,16 @@ const {merge} = require('rxjs');
 const {filter} = require('rxjs/operators');
 const split = require('split');
 
-module.exports = (cmd, args) => {
-    const cp = execa(cmd, args);
+module.exports = (cmd, args, options, callback) => {
+    const cp = execa(cmd, args, options);
+
+    console.log('HERE');
+    // if (callback) {
+    cp.then((result) => {
+        console.log('MADE IT');
+        callback(result.stdout);
+    });
+    // }
 
     return merge(
         streamToObservable(cp.stdout.pipe(split()), {await: cp}),
