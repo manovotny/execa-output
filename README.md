@@ -22,6 +22,8 @@ $ yarn add execa-output
 
 ## Usage
 
+Basic usage is exactly the same as using `execa`.
+
 ```js
 const execa = require('execa');
 const execao = require('execa-output');
@@ -40,6 +42,26 @@ const tasks = new Listr([
 
 tasks.run().catch((error) => {
     console.error(error);
+});
+```
+
+You can also pass in options to `execa`, just like when using `execa` directly.
+
+```js
+const execao = require('execa-output');
+
+const options = {};
+
+execao('some', ['command'], options);
+```
+
+Lastly, you can also provide a callback when you need access to the commnand output.
+
+```js
+const execao = require('execa-output');
+
+execao('some', ['command'], null, (result) => {
+    console.log('command output:', value);
 });
 ```
 
