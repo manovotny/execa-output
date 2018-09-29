@@ -7,13 +7,11 @@ const split = require('split');
 module.exports = (cmd, args, options, callback) => {
     const cp = execa(cmd, args, options);
 
-    console.log('HERE');
-    // if (callback) {
-    cp.then((result) => {
-        console.log('MADE IT');
-        callback(result.stdout);
-    });
-    // }
+    if (callback) {
+        cp.then((result) => {
+            callback(result.stdout);
+        });
+    }
 
     return merge(
         streamToObservable(cp.stdout.pipe(split()), {await: cp}),

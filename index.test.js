@@ -43,11 +43,10 @@ beforeEach(() => {
         },
         stdout: {
             pipe: jest.fn(() => stdoutReturnValue)
-        }
-        // then: jest.fn(() => {
-        //     console.log('IN TEST');
-        //     return resultValue;
-        // })
+        },
+        then: jest.fn((onFulfilled) => {
+            onFulfilled(resultValue);
+        })
     });
     filterReturnValue = chance.string();
     splitReturnValueFirst = chance.string();
@@ -177,7 +176,7 @@ describe('callback', () => {
         execao();
     });
 
-    test.only('should call callback when provided', async () => {
+    test('should call callback when provided', () => {
         const callback = jest.fn();
 
         execao(null, null, null, callback);
